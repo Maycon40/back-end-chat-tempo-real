@@ -7,6 +7,8 @@ const port = process.env.PORT || 8080;
 const wss = new WebSocketServer({ port });
 
 wss.on("connection", (ws) => {
+  console.log(`Novo usuário conectado`);
+
   ws.on("error", console.error);
 
   ws.on("message", (data) => {
@@ -16,6 +18,4 @@ wss.on("connection", (ws) => {
       }
     });
   });
-
-  ws.send("something");
 });

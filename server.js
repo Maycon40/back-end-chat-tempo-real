@@ -1,5 +1,6 @@
 const { WebSocketServer } = require("ws");
 const dotenv = require("dotenv");
+const http = require("http");
 
 const app = require("./app");
 
@@ -7,7 +8,9 @@ dotenv.config();
 
 const port = process.env.PORT || 8080;
 
-const wss = new WebSocketServer({ port });
+const server = http.createServer(app);
+
+const wss = new WebSocketServer({ server });
 
 wss.on("connection", (ws) => {
   console.log(`Novo usuário conectado`);
@@ -23,6 +26,6 @@ wss.on("connection", (ws) => {
   });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`✅ Server running on port ${port}`);
 });

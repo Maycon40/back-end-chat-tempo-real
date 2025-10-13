@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
 
   const response = {
     updated_at: updatedAt,
-    web_socket: {
+    web_service: {
       status,
       detail,
       version,

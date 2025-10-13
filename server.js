@@ -1,9 +1,13 @@
-import { WebSocketServer } from "ws";
-import dotenv from "dotenv";
+const { WebSocketServer } = require("ws");
+const dotenv = require("dotenv");
+
+const app = require("./app");
 
 dotenv.config();
 
+const PORT = process.env.PORT_EXPRESS || 3000;
 const port = process.env.PORT || 8080;
+
 const wss = new WebSocketServer({ port });
 
 wss.on("connection", (ws) => {
@@ -18,4 +22,8 @@ wss.on("connection", (ws) => {
       }
     });
   });
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
